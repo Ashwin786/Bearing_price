@@ -1,24 +1,13 @@
 package com.bearing_price;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.bearing_price.sync.GFG;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -35,12 +24,14 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        GFG gf=new GFG();
+        gf.start();
 //        db = new TestDb(TestActivity.this);
 //        helper();
-        SQLdataHelper sdb = SQLdataHelper.getInstance();
-        TestDb db = new TestDb(TestActivity.this);
-        db.delete();
-        withHelper();
+//        SQLdataHelper sdb = SQLdataHelper.getInstance();
+//        TestDb db = new TestDb(TestActivity.this);
+//        db.delete();
+//        withHelper();
     }
 
     private void withHelper() {
