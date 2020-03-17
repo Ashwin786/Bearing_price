@@ -1,5 +1,9 @@
-package com.bearing_price;
+package com.bearing_price.view.price;
 
+import android.app.ProgressDialog;
+import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,9 +15,14 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.bearing_price.data.Database;
+import com.bearing_price.data.model.Price_dto;
+import com.bearing_price.R;
+import com.bearing_price.Recent_Adapter;
+
 import java.util.List;
 
-public class Price_Activity extends AppCompatActivity {
+public class Price_Activity extends AppCompatActivity implements PriceNavigator{
 
     //    private AutoCompleteTextView auto_ed;
     private EditText ed_search;
@@ -26,12 +35,18 @@ public class Price_Activity extends AppCompatActivity {
     private Recent_Adapter recent_adapter;
     private List<Price_dto> recent_list;
     private AbsListView.OnScrollListener scroll_listener;
+    private ProgressDialog pd;
+    private ViewDataBinding binding;
+    private PriceViewModel priceViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_price_);
-
+        priceViewModel = ViewModelProviders.of(this).get(PriceViewModel.class);
+        priceViewModel.setNavigator(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_price_);
+//        binding.setViewModel(priceViewModel);
+        binding.executePendingBindings();
         textwatcher();
         initView();
 

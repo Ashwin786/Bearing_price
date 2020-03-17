@@ -1,18 +1,21 @@
-package com.bearing_price;
+package com.bearing_price.data;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.bearing_price.data.model.Price_dto;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by user1 on 18/5/17.
  */
 public class Database {
+    public static final String DB_NAME = "BearingPrice.sqlite";
     SQLiteDatabase sql;
     Cursor cursor;
     Context cont;
@@ -23,12 +26,14 @@ public class Database {
     }
 
     public void createoropendb() {
-        sql = cont.openOrCreateDatabase("BearingPrice.sqlite", cont.MODE_PRIVATE, null);
+        sql = cont.openOrCreateDatabase(DB_NAME, cont.MODE_PRIVATE, null);
     }
 
     public List<Price_dto> get_search_products(String text) {
+        if (!TextUtils.isEmpty(text))
+            text = "where products like '%" + text + "%'";
         createoropendb();
-        String retreivequery = "SELECT * FROM BearingPrice order by id Asc";
+        String retreivequery = "SELECT * FROM BearingPrice " + text + " order by Products Asc";
         List<Price_dto> pricelist = null;
         cursor = sql.rawQuery(retreivequery, null);
         Log.e("cursor count", "" + cursor.getCount());
@@ -37,6 +42,7 @@ public class Database {
             pricelist = new ArrayList<>();
             do {
                 String products = cursor.getString(cursor.getColumnIndex("Products"));
+                String brand = cursor.getString(cursor.getColumnIndex("Brand"));
                 int price = cursor.getInt(cursor.getColumnIndex("Price"));
                 int id = cursor.getInt(cursor.getColumnIndex("id"));
 //                Log.e("id", "" + id);
@@ -44,6 +50,7 @@ public class Database {
                 dto.setPrice(price);
                 dto.setProduct(products);
                 dto.setId(id);
+                dto.setBrand(brand);
                 pricelist.add(dto);
             } while (cursor.moveToNext());
             cursor.close();

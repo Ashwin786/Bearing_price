@@ -1,21 +1,22 @@
-package com.bearing_price;
+package com.bearing_price.view.price;
 
-import android.widget.TextView;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import com.bearing_price.R;
 import com.bearing_price.data.model.Price_dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by user1 on 18/8/17.
+ * Created by user1 on 18/5/17.
  */
-public class Recent_Adapter extends ArrayAdapter<Price_dto> {
+public class Price_adapter extends ArrayAdapter<Price_dto> {
     private final Context context;
     protected List<Price_dto> price_list;
     protected final List<Price_dto> orginal_list;
@@ -24,7 +25,7 @@ public class Recent_Adapter extends ArrayAdapter<Price_dto> {
     private Price_dto dto;
 
 
-    public Recent_Adapter(Context context, int resource, List<Price_dto> price_list) {
+    public Price_adapter(Context context, int resource, List<Price_dto> price_list) {
         super(context, resource, price_list);
         this.resource = resource;
         this.price_list = price_list;
@@ -64,17 +65,13 @@ public class Recent_Adapter extends ArrayAdapter<Price_dto> {
         }
         dto = getItem(i);
         holder.product.setText(dto.getProduct());
-        holder.price.setText("₹ " + dto.getPrice());
+        holder.price.setText("₹ "+dto.getPrice());
         holder.brand.setText(dto.getBrand());
-        if(i==0)
-            convertview.setBackgroundColor(context.getResources().getColor(R.color.Highlight));
-        else
-            convertview.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
         return convertview;
     }
 
-    public void setData(List<Price_dto> recent_list) {
-        this.price_list=recent_list;
+    public void setData(List<Price_dto> list) {
+        this.price_list = list;
         notifyDataSetChanged();
     }
 
@@ -90,7 +87,7 @@ public class Recent_Adapter extends ArrayAdapter<Price_dto> {
         } else {
             for (Price_dto dto : orginal_list) {
                 if (dto.getProduct().startsWith(text))
-                    price_list.add(0, dto);
+                    price_list.add(0,dto);
                 else if (dto.getProduct().contains(text)) {
                     price_list.add(dto);
                 }
@@ -100,4 +97,3 @@ public class Recent_Adapter extends ArrayAdapter<Price_dto> {
         notifyDataSetChanged();
     }
 }
-

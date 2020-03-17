@@ -1,7 +1,6 @@
 package com.bearing_price;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
 import android.provider.Settings;
@@ -14,6 +13,8 @@ import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import com.bearing_price.view.price.Price_Activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,6 +33,7 @@ public class Password_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sp = getSharedPreferences(login, MODE_PRIVATE);
+//        new AutoUpgradeCheck(this).check_version();
         if (checkIs_mymobile() && sp.getBoolean(copydatabase, false)) {
             finish();
             startActivity(new Intent(this, Price_Activity.class));
