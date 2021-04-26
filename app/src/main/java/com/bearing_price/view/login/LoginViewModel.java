@@ -1,11 +1,12 @@
 package com.bearing_price.view.login;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 
 import com.bearing_price.data.Database;
 

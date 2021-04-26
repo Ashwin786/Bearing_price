@@ -1,8 +1,8 @@
 package com.bearing_price.view.product;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.bearing_price.data.localDb.DbRepository;
 import com.bearing_price.data.model.Price_dto;

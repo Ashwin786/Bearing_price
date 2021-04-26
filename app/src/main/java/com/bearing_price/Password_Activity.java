@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +12,8 @@ import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bearing_price.view.price.Price_Activity;
 
@@ -24,7 +25,7 @@ import java.io.OutputStream;
 
 public class Password_Activity extends AppCompatActivity {
 
-    String dbpath, dbname = "BearingPrice.sqlite", login = "login";
+    String dbpath, dbname = "BearingPrice_old_1.sqlite", login = "login";
     private SharedPreferences sp;
     private String copydatabase = "copydatabase";
     public String mi_id = "a654034904db8133"; //mi
